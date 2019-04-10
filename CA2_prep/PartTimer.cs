@@ -11,11 +11,36 @@ namespace CA2_prep
         public decimal HourlyRate { get; set; }
         public int Hours { get; set; }
 
-        public PartTimer(string firstName, string lastName, decimal salary, int hours, decimal hourlyRate)
-            : base(firstName, lastName, salary)
+        private static int _partTimerCount;
+
+        public static int PartTimerCount
+        {
+            get { return _partTimerCount; }
+        }
+
+        public PartTimer(string firstName, string lastName, int hours, decimal hourlyRate)
+            : base(firstName, lastName)
         {
             HourlyRate = hourlyRate;
             Hours = hours;
+            _partTimerCount++;
+        }
+
+        public PartTimer(string firstName, string lastName)
+            :this(firstName, lastName, 0,0)
+        {
+
+        }
+
+        public PartTimer()
+            : this("Unknown", "Unknown")
+        {
+
+        }
+
+        public override string ToString()
+        {
+            return string.Format(" [{0}] {1} {2} Weekly wages{3}", this.GetType().Name.ToUpper(), FirstName, LastName,  HourlyRate* Hours);
         }
     }
 }
